@@ -1,12 +1,11 @@
-  GNU nano 7.2                                                                                                                SS14.Watchdog/Dockerfile
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
 WORKDIR /build
 ADD . .
 
 RUN dotnet publish -c Release -r linux-x64 --no-self-contained
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/sdk:9.0
 
 # These are apparently required dependencies.
 RUN apt update -y && \
