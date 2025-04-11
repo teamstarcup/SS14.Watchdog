@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0
 RUN apt update -y && \
     apt install -y git python3 python-is-python3
 
-COPY --from=build /build/SS14.Watchdog/bin/Release/net8.0/linux-x64/publish /watchdog
+COPY --from=build /build/SS14.Watchdog/bin/Release/net9.0/linux-x64/publish /watchdog
 
 WORKDIR /watchdog
 
