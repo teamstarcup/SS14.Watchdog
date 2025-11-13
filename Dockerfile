@@ -11,16 +11,13 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0
 RUN apt update -y && \
     apt install -y git python3 python-is-python3
 
-COPY --from=build /build/SS14.Watchdog/bin/Release/net9.0/linux-x64/publish /watchdog
+USER        container
+ENV         USER=container HOME=/home/container
+WORKDIR     /home/container
 
-WORKDIR /watchdog
+COPY --chown=container:container --from=build /build/SS14.Watchdog/bin/Release/net9.0/linux-x64/publish /home/container
 
-# Both TCP and UDP traffic must be explicitly exposed on port 1212
-EXPOSE 1212/tcp
-EXPOSE 1212/udp
-EXPOSE 8080/tcp
-
-VOLUME ["/watchdog/instances"]
+VOLUME ["/home/container"]
 
 ENV DOTNET_ENVIRONMENT Production
 
