@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
 WORKDIR /build
 ADD . .
 
 RUN dotnet publish -c Release -r linux-x64 --no-self-contained
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0
+FROM mcr.microsoft.com/dotnet/sdk:10.0
 
 RUN apt update -y && \
     apt install -y git python3 python-is-python3 iproute2 tini net-tools
